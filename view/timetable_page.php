@@ -140,13 +140,13 @@ if (isset($_POST['tt-settings-submit']) && $_POST['tt-settings-submit'] == 'Y') 
                 <p>Die Startzeit muss vor der Endzeit liegen</p>
             </div>
             <?php
-            }else if (TimeTableEntry::entryOverlaps($starttime, $endtime, TimeTableEntry::$DAYS[$actDay])){
+            }/*else if (TimeTableEntry::entryOverlaps($starttime, $endtime, TimeTableEntry::$DAYS[$actDay])){
             ?>
             <div id="message" class="error notice is-dismissible">
                 <p>Der Kurs überschneidet sich zeitlich mit einem anderen</p>
             </div>
             <?php
-            }else {
+            }*/else {
                 $values = array(
                     'course' => $course,
                     'start_time' => $starttime,

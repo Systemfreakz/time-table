@@ -4,10 +4,13 @@ function execute_multiline_sql($sql) {
     global $wpdb;
     $sqlParts = array_filter(explode(TT_MYSQL_QUERY_SEPARATOR, $sql));
     foreach($sqlParts as $part) {
-        $wpdb->query($part);
-        if($wpdb->last_error != '') {
-            $error = new WP_Error("dberror", __("Database query error"), $wpdb->last_error);
-            return $error;
+        $part = preg_replace('/DROP TABLE IF EXISTS (.*)/Usi', 'TRUNCATE $1', $part);
+        if (!strstr($part, 'CREATE TABLE')) {
+            $wpdb->query($part);
+            if($wpdb->last_error != '') {
+                $error = new WP_Error("dberror", __("Database query error"), $wpdb->last_error);
+                return $error;
+            }
         }
     }
     return true;

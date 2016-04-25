@@ -7,6 +7,7 @@ class TimeTableEntry {
     private $start_time;
     private $end_time;
     private $day;
+    private $id;
 
     public static $DAYS = array(
         'mon' => 'Montag',
@@ -66,8 +67,18 @@ class TimeTableEntry {
         return sizeof($entries) > 0;
     }
 
+    public final static function countCurrentOverlappings($day, $time) {
+        global $wpdb;
+        $entries = $wpdb->get_results('
+          SELECT start_time, end_time FROM ' . $wpdb->prefix . 'time_table
+          WHERE day = "' . $day . '"
+          AND (start_time <= "' . $time . '" AND end_time > "' . $time . '")');
+        return $wpdb->num_rows;
+    }
+
     public function __construct($data) {
         $this->data = $data;
+        $this->id = $data->id;
         $this->course = new Course($data->course);
         $this->start_time = strtotime($data->start_time);
         $this->end_time = strtotime($data->end_time);
@@ -88,6 +99,56 @@ class TimeTableEntry {
 
     public function getDay() {
         return $this->day;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function countOverlappings() {
+        global $wpdb;
+        $entries = $wpdb->get_results('
+          SELECT t2.start_time, t2.end_time FROM ' . $wpdb->prefix . 'time_table t1, ' . $wpdb->prefix . 'time_table t2
+          WHERE t1.id = "' . $this->id . '" AND t1.day = t2.day
+          AND (t1.start_time <= t2.start_time AND t1.end_time > t2.start_time
+              OR t1.start_time <= t2.start_time AND t1.end_time >= t2.end_time
+              OR t1.start_time > t2.start_time AND t1.start_time < t2.end_time)');
+        return $wpdb->num_rows;
+    }
+
+    public function countMaxConcurrentOverlappings() {
+        global $wpdb;
+        $entries = $wpdb->get_results('
+          SELECT t2.start_time, t2.end_time FROM ' . $wpdb->prefix . 'time_table t1, ' . $wpdb->prefix . 'time_table t2
+          WHERE t1.id = "' . $this->id . '" AND t1.day = t2.day
+          AND (t1.start_time <= t2.start_time AND t1.end_time > t2.start_time
+              OR t1.start_time <= t2.start_time AND t1.end_time >= t2.end_time
+              OR t1.start_time > t2.start_time AND t1.start_time < t2.end_time)');
+        $start_values = array();
+        $end_values = array();
+        foreach ($entries as $entry) {
+            $start_values[] = strtotime($entry->start_time);
+            $end_values[] = strtotime($entry->end_time);
+        }
+        sort($start_values);
+        sort($end_values);
+        $result = 0;
+        $max_result = 0;
+        while (sizeof($start_values) > 0) {
+            $smallest_start_value = $start_values[0];
+            $smallest_end_value = $end_values[0];
+            if ($smallest_start_value < $smallest_end_value) {
+                $result ++;
+                array_shift($start_values);
+                if ($result > $max_result) {
+                    $max_result = $result;
+                }
+            } else {
+                $result --;
+                array_shift($end_values);
+            }
+        }
+        return $max_result;
     }
 
 }

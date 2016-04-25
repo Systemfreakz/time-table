@@ -47,11 +47,11 @@ function time_table_install() {
     dbDelta($sql);
 
     $sql = "CREATE TABLE $time_table_table_name (
+      id int AUTO_INCREMENT PRIMARY KEY,
       course mediumint(9) NOT NULL REFERENCES " . $course_table_name . "(id),
       start_time TIME NOT NULL,
       end_time TIME NOT NULL,
-      day ENUM('Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'),
-      UNIQUE KEY id (course, start_time, end_time, day)
+      day ENUM('Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag')
     ) $charset_collate;";
 
     dbDelta($sql);

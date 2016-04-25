@@ -1,5 +1,8 @@
 <?php
 global $tt_params;
+
+define('MAX_OVERLAPPINGS', 6);      //defines how many overlappings can be handled maximally
+define('DAY_COLUMN_DISTANCE', 2);   //defines the space between the day columns in percent
 ?>
 <script type="text/javascript">
     var ttOverlayBoxBackgroundImage = '<?php echo get_option('tt-overlay-box-background-image'); ?>';
@@ -82,6 +85,7 @@ global $tt_params;
                 $i ++;
             }
             $timetableGap = false;
+            $td_width = (100 - ($useWeekendCourses?6:4)*DAY_COLUMN_DISTANCE) / (($useWeekendCourses ? 7 : 5) * MAX_OVERLAPPINGS);
             echo '</tr></table>';
             for ($i = $starttime; $i < $endtime; $i += 900) {
                 $time = date('H:i', $i);
@@ -89,6 +93,16 @@ global $tt_params;
                 if ($usedTimeSlot) {
                     if (!$timetableGap) {
                         echo '<div class="tt-timetable"><table>';
+                        echo '<tr>';
+                        for ($i_day = 0; $i_day < ($useWeekendCourses ? 7 : 5); $i_day++) {
+                            if ($i_day > 0) {
+                                echo '<td width="' . DAY_COLUMN_DISTANCE . '%" rowspan="100"></td>';
+                            }
+                            for ($i_td = 0; $i_td < MAX_OVERLAPPINGS; $i_td++) {
+                                echo '<td width="' . $td_width . '%"></td>';
+                            }
+                        }
+                        echo '</tr>';
                     }
                     echo '<tr class="tt-timetable-row" valign="top">';
                     //echo '<td class="tt-timetable-cell tt-timetable-time" width="' . 100 / ($useWeekendCourses?8:6) . '%">' . ((($i / 900) % 2 == 0)?$time:'') . '</td>';
@@ -98,8 +112,10 @@ global $tt_params;
                             $course = TimeTableEntry::getTimeTableEntryAtDayAndTime($day, $time);
                             if (sizeof($course) > 0) {
                                 $course = $course[0];
+                                $overlappings = $course->countMaxConcurrentOverlappings();
                                 $length = ((date($course->getEndTime()) - date($course->getStartTime())) / 900);
-                                echo '<td class="tt-timetable-cell" rowspan="' . $length . '" width="' . 100 / ($useWeekendCourses?7:5) . '%">';
+                                $width = (MAX_OVERLAPPINGS / $overlappings) * $td_width;
+                                echo '<td class="tt-timetable-cell" rowspan="' . $length . '" colspan="' . (MAX_OVERLAPPINGS / $overlappings) . '" width="' . $width . '%">';
                                 echo '<a id="tt-timetable-open-' . $day . (date($course->getStartTime()) / 900) . '" href="" class="tt-timetable-course tt-timetable-course-cat-' . $course->getCourse()->getCategory()->getId() . '">';
                                 echo '<span class="tt-course-date">' . date('H:i', $course->getStartTime()) . ' - ' . date('H:i', $course->getEndTime()) . '<br /></span><span class="tt-course-name">' . $course->getCourse()->getName() . '</span>';
                                 echo '</a>';
@@ -121,11 +137,15 @@ global $tt_params;
                                 echo '</script>';
                                 echo '</div>';
                                 echo '</td>';
+                                $currentOverlappings = TimeTableEntry::countCurrentOverlappings($day, $time);
+                                for ($i_fill = 0; $i_fill < MAX_OVERLAPPINGS / $currentOverlappings - MAX_OVERLAPPINGS / $overlappings; $i_fill++) {
+                                    echo '<td width="' . $td_width . '"></td>';
+                                }
                                 for ($j = 0; $j < $length; $j++) {
                                     $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = true;
                                 }
                             }else if(!$timeSlotOverlap[($i - $starttime)/900][$day]) {
-                                echo '<td class="tt-timetable-cell" width="' . 100 / ($useWeekendCourses?7:5) . '%">' . $timeSlotOverlap[($i - $starttime)/900][$day] . '</td>';
+                                echo '<td class="tt-timetable-cell" colspan="' . MAX_OVERLAPPINGS . '" width="' . $td_width * MAX_OVERLAPPINGS . '%">' . $timeSlotOverlap[($i - $starttime)/900][$day] . '</td>';
                             }
                         }
                         $timetableGap = true;
