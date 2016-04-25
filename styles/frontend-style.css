@@ -1,0 +1,272 @@
+/*
+    Author     : Tobias Kirschstein
+*/
+
+.tt-frontend {
+    position: relative;
+}
+
+.tt-frontend-wrapper {
+    overflow: hidden;
+}
+
+.tt-frontend .tt-background-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 100% auto;
+    background: no-repeat center center;
+}
+
+.tt-overlay-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.tt-overlay-box .overlay-box-wrapper {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 5%;
+    background-size: 100% auto;
+    overflow: auto;
+    box-shadow: 0 0 10px #000;
+}
+
+.tt-overlay-box a.overlay-box-close {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    z-index: 1;
+    font-size: 30px;
+    line-height: 38px;
+    color: #000;
+    margin: 5%;
+}
+
+.tt-overlay-box a.overlay-box-close:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.tt-overlay-box .overlay-box-content {
+    margin: 5%;
+}
+
+.tt-overlay-colorbox #cboxLoadedContent  {
+    max-width: 300px;
+}
+
+.tt-overlay-colorbox #cboxLoadedContent  img {
+    width: 100%;
+    display: block;
+}
+
+.tt-timetable-course-description {
+    text-align: center;
+    padding: 20px;
+}
+
+.tt-timetable-course-description .tt-timetable-course-name {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.tt-timetable-link {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    background-color: blue;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.tt-timetable-slide-button {
+    position: absolute;
+    height: 40px;
+    width: 25px;
+    background-color: #014e83;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    z-index: 5;
+    display: none;
+    text-decoration: none;;
+}
+
+.tt-timetable-slide-button:hover {
+    text-decoration: none;
+}
+
+.tt-timetable-slide-button:visited {
+    color: white;
+}
+
+.tt-timetable-slide-left {
+    left: 16.6666667%;
+}
+
+.tt-timetable-slide-right {
+    right: 10px;
+}
+
+.tt-timetable-time-column,
+.tt-timetable-columns-wrapper {
+    display: inline-block;
+}
+
+.tt-timetable-days-header,
+.tt-timetable-days-header-time {
+    border: none;
+    color: #fff;
+    height: 50px;
+    width: 100%;
+    background: green url(../images/time-table-course-bg.png) repeat-x;
+}
+
+.tt-timetable-time-column td,
+.tt-timetable-days-header td {
+    border: none;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.tt-timetable-days-header .tt-day-short {
+    display: none;
+}
+
+.tt-timetable {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px 0;
+    margin-bottom: 15px;
+}
+
+.tt-timetable:last-child {
+    margin-bottom: 0;
+}
+
+.tt-timetable table {
+    width: 100%;
+}
+
+.tt-timetable table {
+    border: none;
+}
+
+.tt-timetable-wrapper {
+    position: relative;
+    padding: 10px;
+}
+
+.tt-timetable .tt-timetable-row {
+    height: 20px;
+}
+
+.tt-timetable .tt-timetable-cell {
+    border: none;
+    line-height: 1;
+    text-align: center;
+    position: relative;
+    color: #141414;
+    overflow: hidden;
+}
+
+.tt-timetable .tt-timetable-cell .tt-timetable-course {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 0;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+    background-image: url(../images/time-table-course-bg.png);
+    background-repeat: repeat-x;
+}
+
+.tt-timetable .tt-timetable-cell .tt-timetable-overlay {
+    display: none;
+}
+
+.tt-timetable .tt-timetable-time {
+    padding: 0;
+    font-size: 15px;
+}
+
+.tt-timetable .tt-course-name,
+.tt-timetable .tt-course-date {
+    display: block;
+}
+
+.tt-timetable .tt-course-date {
+    padding-top: 5px;
+    font-size: 13px;
+}
+
+.tt-timetable .tt-course-name {
+    padding-top: 5px;
+    hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+/**
+ * Display on small devices
+ */
+
+.tt-frontend.mobile .tt-timetable-columns-wrapper {
+    overflow: hidden;
+}
+
+.tt-frontend.mobile .tt-timetable-columns-slider {
+    width: 166.666666666667%;
+    position: relative;
+}
+
+.tt-frontend.mobile .tt-timetable-slide-button {
+    display: block;
+}
+
+.tt-frontend.mobile .tt-timetable-days-header .tt-day-short {
+    display: inline;
+}
+
+.tt-frontend.mobile .tt-timetable-days-header .tt-day-full {
+    display: none;
+}
+
+.tt-frontend.mobile .tt-timetable-days-header,
+.tt-frontend.mobile .tt-timetable-days-header-time {
+    height: 40px;
+}
+
+.tt-pdf-link {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.tt-pdf-link:hover {
+    text-decoration: underline;
+}
+
+.tt-pdf-link img {
+    display: inline-block;
+    vertical-align: middle;
+}

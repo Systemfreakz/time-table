@@ -1,0 +1,96 @@
+/*
+    Author     : Tobias Kirschstein
+*/
+
+.nav-tab.help {
+    float: right;
+}
+
+#tt-list-courses tr {
+    border-bottom: 1px solid #ccc;
+}
+
+#tt-list-courses th {
+    width: 100px;
+    vertical-align: middle;
+}
+
+.tt-settings-section {
+    padding-right: 20px;
+    margin-bottom: 50px;
+}
+
+.tt-settings-content {
+    padding-left: 40px;
+}
+
+.tt-settings-header {
+    border: 1px solid #ccc;
+    background-color: #fcfcfc;
+    padding: 1px 20px;
+}
+
+#tt-header {
+    margin: 30px 0;
+}
+
+#tt-background-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.tt-entry {
+    border: 1px solid #ccc;
+}
+
+
+figure {
+    position: relative;
+    padding: 10px;
+    border: 1px solid gainsboro;
+    background: white;
+    float: right;
+    margin: 10px;
+    text-align: center;
+}
+
+figcaption {
+    padding: 10px;
+    text-align: center;
+}
+
+#TB_ajaxContent img {
+    height: auto;
+    width: 100%;
+}
+
+
+.tt-params-table {
+    border-collapse: collapse;
+}
+
+.tt-params-table td {
+    border: 1px solid #999;
+}
+
+.tt-params-table tr:first-child {
+    background-color: #ccc;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 3px solid #999;
+}
+
+.tt-params-table .tt-params-table-new-param td:first-child {
+    border-right: none;
+    background-color: #ddd;
+}
+
+.tt-params-table .tt-params-table-new-param td:last-child {
+    border-left: none;
+    background-color: #ddd;
+}
