@@ -62,7 +62,7 @@ define('DAY_COLUMN_DISTANCE', 2);   //defines the space between the day columns 
                 $usedTimeSlot = sizeof(TimeTableEntry::getTimeTableEntriesAtTime($time)) > 0;
                 if ($usedTimeSlot) {
                     if (!$timetableGap) {
-                        echo '<div class="tt-timetable"><table>';
+                        echo '<div class="tt-timetable"><table cellpadding="0" cellspacing="0">';
                     }
                     echo '<tr class="tt-timetable-row" valign="top">';
                     echo '<td class="tt-timetable-cell tt-timetable-time">' . ((($i / 900) % 2 == 0) ? $time : '') . '</td>';
@@ -92,7 +92,7 @@ define('DAY_COLUMN_DISTANCE', 2);   //defines the space between the day columns 
                 $usedTimeSlot = sizeof(TimeTableEntry::getTimeTableEntriesAtTime($time)) > 0;
                 if ($usedTimeSlot) {
                     if (!$timetableGap) {
-                        echo '<div class="tt-timetable"><table>';
+                        echo '<div class="tt-timetable"><table cellpadding="0" cellspacing="0">';
                         echo '<tr>';
                         for ($i_day = 0; $i_day < ($useWeekendCourses ? 7 : 5); $i_day++) {
                             if ($i_day > 0) {
