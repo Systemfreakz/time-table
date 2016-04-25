@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Kursplan
  * Description: Fügt einen Kursplan zu Wordpress hinzu, dessen Aussehen und Inhalte bearbeitet werden können.
- * Version: 2.3
+ * Version: 2.4
  * Author: Tobias Kirschstein
  */
 

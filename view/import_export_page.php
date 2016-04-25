@@ -5,6 +5,8 @@ function execute_multiline_sql($sql) {
     $sqlParts = array_filter(explode(TT_MYSQL_QUERY_SEPARATOR, $sql));
     foreach($sqlParts as $part) {
         $part = preg_replace('/DROP TABLE IF EXISTS (.*)/Usi', 'TRUNCATE $1', $part);
+        $part = preg_replace('/INSERT INTO wp_time_table VALUES\(([^,]*),([^,]*),([^,]*),([^,]*)\)/Usi',
+            'INSERT INTO wp_time_table(course, start_time, end_time, day) VALUES($1, $2, $3, $4)', $part);
         if (!strstr($part, 'CREATE TABLE')) {
             $wpdb->query($part);
             if($wpdb->last_error != '') {

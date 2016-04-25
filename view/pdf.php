@@ -3,6 +3,8 @@
 $pdfH1 = get_option('tt-pdf-h1');
 $pdfH2 = get_option('tt-pdf-h2');
 
+define('MAX_OVERLAPPINGS', 6);      //defines how many overlappings can be handled maximally
+
 $html = "<h1 style='text-align: center'>" . ($pdfH1 != ''?$pdfH1:'Kursplan') . "</h1>";
 if ($pdfH2 != '') {
     $html .= "<h2 style='text-align: center'>" . $pdfH2 . "</h2>";
@@ -30,14 +32,25 @@ foreach ($days as $day) {
     $i ++;
 }
 $timetableGap = false;
+$td_width = 100 / (($useWeekendCourses ? 8 : 6) * MAX_OVERLAPPINGS);
 $html .= '</tr></table><br />';
 for ($i = $starttime; $i < $endtime; $i += 900) {
     $time = date('H:i', $i);
-    $usedTimeSlot = sizeof(TimeTableEntry::getTimeTableEntriesAtTime($time)) > 0;
+    $next_time = date('H:i', $i + 900);
+    $usedTimeSlot = sizeof(TimeTableEntry::getTimeTableEntriesAtTime($time)) > 0
+        || sizeof(TimeTableEntry::getTimeTableEntriesAtTime($next_time)) > 0 && ($i / 900) % 2 == 0;
     $previousTimeSlotUsed = sizeof(TimeTableEntry::getTimeTableEntriesAtTime(date('H:i', $i - 900))) > 0;
     if ($usedTimeSlot || $previousTimeSlotUsed && ($i / 900) % 2 == 1) {
         if (!$timetableGap) {
             $html .= '<table width="100%" style=" border: 1px solid #000">';
+            $html .= '<tr bgcolor="lightgray">';
+            $html .= '<td width="' . $td_width * MAX_OVERLAPPINGS . '%"></td>';
+            for ($i_day = 0; $i_day < ($useWeekendCourses ? 7 : 5); $i_day++) {
+                for ($i_td = 0; $i_td < MAX_OVERLAPPINGS; $i_td++) {
+                    $html .= '<td width="' . $td_width . '%"></td>';
+                }
+            }
+            $html .= '</tr>';
         }
         $html .= '<tr>';
         if (($i / 900) % 2 == 0) {
@@ -47,20 +60,29 @@ for ($i = $starttime; $i < $endtime; $i += 900) {
         foreach ($days as $day) {
             if ($day != 'Samstag' && $day != 'Sonntag' || $useWeekendCourses) {
 
-                $course = TimeTableEntry::getTimeTableEntryAtDayAndTime($day, $time);
-                if (sizeof($course) > 0) {
-                    $course = $course[0];
-                    $length = ((date($course->getEndTime()) - date($course->getStartTime())) / 900);
-                    $html .= '<td rowspan="' . $length . '" align="center" width="' . (100 / ($useWeekendCourses?8:6)) . '%"';
-                    $html .= ' bgcolor="' . $course->getCourse()->getCategory()->getColor() . '" style="border: 1px solid #000">';
-                    $html .= '<span style="text-shadow: 1px 1px #000; color: #fff">' . date('H:i', $course->getStartTime()) . ' - ' . date('H:i', $course->getEndTime()) . '<br /></span>';
-                    $html .= '<span style="text-shadow: 1px 1px #000; color: #fff">' . $course->getCourse()->getName() . '</span>';
-                    $html .= '</td>';
-                    for ($j = 0; $j < $length; $j++) {
-                        $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = true;
+                $courses = TimeTableEntry::getTimeTableEntryAtDayAndTime($day, $time);
+                if (sizeof($courses) > 0) {
+                    foreach ($courses as $course) {
+                        $overlappings = $course->countMaxConcurrentOverlappings();
+                        $length = ((date($course->getEndTime()) - date($course->getStartTime())) / 900);
+                        $width = (MAX_OVERLAPPINGS / $overlappings) * $td_width;
+                        $html .= '<td rowspan="' . $length . '" colspan="' . MAX_OVERLAPPINGS / $overlappings . '" align="center" width="' . $width . '%"';
+                        $html .= ' bgcolor="' . $course->getCourse()->getCategory()->getColor() . '" style="border: 1px solid #000">';
+                        if ($overlappings <= 2) {
+                            $html .= '<span style="text-shadow: 1px 1px #000; color: #fff">' . date('H:i', $course->getStartTime()) . ' - ' . date('H:i', $course->getEndTime()) . '<br /></span>';
+                        }
+                        $html .= '<span style="text-shadow: 1px 1px #000; color: #fff">' . $course->getCourse()->getName() . '</span>';
+                        $html .= '</td>';
+                        $currentOverlappings = TimeTableEntry::countCurrentOverlappings($day, $time);
+                        for ($i_fill = 0; $i_fill < ($overlappings - $currentOverlappings) * (MAX_OVERLAPPINGS / $overlappings); $i_fill++) {
+                            $html .= '<td width="' . $td_width . '"></td>';
+                        }
+                        for ($j = 0; $j < $length; $j++) {
+                            $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = true;
+                        }
                     }
                 }else if(!$timeSlotOverlap[($i - $starttime)/900][$day]) {
-                    $html .= '<td height="18px"' . (($i/900) % 2 == 0 ? ' style="border-top: 0px solid #000"' : '') . '></td>';
+                    $html .= '<td colspan="' . MAX_OVERLAPPINGS . '" width="' . $td_width * MAX_OVERLAPPINGS . '" height="18px"' . (($i/900) % 2 == 0 ? ' style="border-top: 0px solid #000"' : '') . '></td>';
                 }
             }
             $timetableGap = true;

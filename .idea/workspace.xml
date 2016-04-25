@@ -36,18 +36,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="time-table.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="time-table.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/time-table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.115385">
-              <caret line="53" column="77" selection-start-line="53" selection-start-column="77" selection-end-line="53" selection-end-column="77" />
+            <state vertical-scroll-proportion="0.22788204">
+              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
               <folding>
-                <marker date="1461573834088" expanded="true" signature="879:1209" placeholder="CREATE TABLE... ${$course_table_name}" />
-                <marker date="1461573834088" expanded="true" signature="1323:1504" placeholder="CREATE TABLE... ${$category_table_name}" />
-                <marker date="1461573834088" expanded="true" signature="1557:1878" placeholder="CREATE TABLE... ${$time_table_table_name}" />
-                <marker date="1461573834088" expanded="true" signature="2222:2243" placeholder="DROP TABLE I... " />
-                <marker date="1461573834088" expanded="true" signature="2302:2323" placeholder="DROP TABLE I... " />
-                <marker date="1461573834088" expanded="true" signature="2384:2405" placeholder="DROP TABLE I... " />
+                <marker date="1461581441546" expanded="true" signature="879:1209" placeholder="CREATE TABLE... ${$course_table_name}" />
+                <marker date="1461581441546" expanded="true" signature="1323:1504" placeholder="CREATE TABLE... ${$category_table_name}" />
+                <marker date="1461581441546" expanded="true" signature="1557:1878" placeholder="CREATE TABLE... ${$time_table_table_name}" />
+                <marker date="1461581441546" expanded="true" signature="2222:2243" placeholder="DROP TABLE I... " />
+                <marker date="1461581441546" expanded="true" signature="2302:2323" placeholder="DROP TABLE I... " />
+                <marker date="1461581441546" expanded="true" signature="2384:2405" placeholder="DROP TABLE I... " />
               </folding>
             </state>
           </provider>
@@ -56,9 +56,11 @@
       <file leaf-file-name="import_export_page.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/import_export_page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.5384617">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="-4.576923">
+              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+              <folding>
+                <marker date="1461581294934" expanded="true" signature="373:456" placeholder="INSERT INTO wp_time_table... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,19 +68,38 @@
       <file leaf-file-name="timetable_page.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/timetable_page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.730769">
-              <caret line="148" column="15" selection-start-line="148" selection-start-column="15" selection-end-line="148" selection-end-column="15" />
+            <state vertical-scroll-proportion="-29.384615">
+              <caret line="174" column="62" selection-start-line="174" selection-start-column="62" selection-end-line="174" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Frontend.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Frontend.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/Frontend.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.41018766">
-              <caret line="140" column="134" selection-start-line="140" selection-start-column="134" selection-end-line="140" selection-end-column="134" />
-              <folding />
+            <state vertical-scroll-proportion="-1.8545455">
+              <caret line="146" column="37" selection-start-line="143" selection-start-column="36" selection-end-line="146" selection-end-column="37" />
+              <folding>
+                <marker date="1461579931108" expanded="true" signature="10209:10252" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pdf.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/pdf.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.153846">
+              <caret line="40" column="99" selection-start-line="40" selection-start-column="99" selection-end-line="40" selection-end-column="99" />
+              <folding>
+                <marker date="1461580582472" expanded="true" signature="190:208" placeholder="..." />
+                <marker date="1461580582472" expanded="true" signature="303:321" placeholder="..." />
+                <marker date="1461580582472" expanded="true" signature="2057:2080" placeholder="..." />
+                <marker date="1461580582472" expanded="true" signature="3724:3762" placeholder="..." />
+                <marker date="1461580582472" expanded="true" signature="3942:3980" placeholder="..." />
+                <marker date="1461580582472" expanded="true" signature="5337:5409" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,13 +135,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/styles/frontend-style.css" />
-        <option value="$PROJECT_DIR$/view/pdf.php" />
-        <option value="$PROJECT_DIR$/time-table.php" />
-        <option value="$PROJECT_DIR$/view/import_export_page.php" />
-        <option value="$PROJECT_DIR$/view/timetable_page.php" />
         <option value="$PROJECT_DIR$/model/TimeTableEntry.php" />
         <option value="$PROJECT_DIR$/view/Frontend.php" />
+        <option value="$PROJECT_DIR$/styles/frontend-style.css" />
+        <option value="$PROJECT_DIR$/view/timetable_page.php" />
+        <option value="$PROJECT_DIR$/view/pdf.php" />
+        <option value="$PROJECT_DIR$/view/import_export_page.php" />
+        <option value="$PROJECT_DIR$/time-table.php" />
       </list>
     </option>
   </component>
@@ -138,6 +159,25 @@
     <option name="y" value="-8" />
     <option name="width" value="1378" />
     <option name="height" value="780" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SqlNoDataSourceInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -193,6 +233,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="time-table" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="time-table" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="styles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -337,37 +391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/time-table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385">
-          <caret line="53" column="77" selection-start-line="53" selection-start-column="77" selection-end-line="53" selection-end-column="77" />
-          <folding>
-            <marker date="1461573834088" expanded="true" signature="879:1209" placeholder="CREATE TABLE... ${$course_table_name}" />
-            <marker date="1461573834088" expanded="true" signature="1323:1504" placeholder="CREATE TABLE... ${$category_table_name}" />
-            <marker date="1461573834088" expanded="true" signature="1557:1878" placeholder="CREATE TABLE... ${$time_table_table_name}" />
-            <marker date="1461573834088" expanded="true" signature="2222:2243" placeholder="DROP TABLE I... " />
-            <marker date="1461573834088" expanded="true" signature="2302:2323" placeholder="DROP TABLE I... " />
-            <marker date="1461573834088" expanded="true" signature="2384:2405" placeholder="DROP TABLE I... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/import_export_page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.5384617">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/timetable_page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.730769">
-          <caret line="148" column="15" selection-start-line="148" selection-start-column="15" selection-end-line="148" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/TimeTableEntry.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.423077">
@@ -392,11 +415,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/styles/frontend-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6773256">
+          <caret line="198" column="15" selection-start-line="198" selection-start-column="15" selection-end-line="198" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/Frontend.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41018766">
-          <caret line="140" column="134" selection-start-line="140" selection-start-column="134" selection-end-line="140" selection-end-column="134" />
+        <state vertical-scroll-proportion="-1.8545455">
+          <caret line="146" column="37" selection-start-line="143" selection-start-column="36" selection-end-line="146" selection-end-column="37" />
+          <folding>
+            <marker date="1461579931108" expanded="true" signature="10209:10252" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/timetable_page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.384615">
+          <caret line="174" column="62" selection-start-line="174" selection-start-column="62" selection-end-line="174" selection-end-column="62" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/pdf.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="40" column="99" selection-start-line="40" selection-start-column="99" selection-end-line="40" selection-end-column="99" />
+          <folding>
+            <marker date="1461580582472" expanded="true" signature="190:208" placeholder="..." />
+            <marker date="1461580582472" expanded="true" signature="303:321" placeholder="..." />
+            <marker date="1461580582472" expanded="true" signature="2057:2080" placeholder="..." />
+            <marker date="1461580582472" expanded="true" signature="3724:3762" placeholder="..." />
+            <marker date="1461580582472" expanded="true" signature="3942:3980" placeholder="..." />
+            <marker date="1461580582472" expanded="true" signature="5337:5409" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/import_export_page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+          <folding>
+            <marker date="1461581294934" expanded="true" signature="373:456" placeholder="INSERT INTO wp_time_table... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/time-table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22788204">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding>
+            <marker date="1461581441546" expanded="true" signature="879:1209" placeholder="CREATE TABLE... ${$course_table_name}" />
+            <marker date="1461581441546" expanded="true" signature="1323:1504" placeholder="CREATE TABLE... ${$category_table_name}" />
+            <marker date="1461581441546" expanded="true" signature="1557:1878" placeholder="CREATE TABLE... ${$time_table_table_name}" />
+            <marker date="1461581441546" expanded="true" signature="2222:2243" placeholder="DROP TABLE I... " />
+            <marker date="1461581441546" expanded="true" signature="2302:2323" placeholder="DROP TABLE I... " />
+            <marker date="1461581441546" expanded="true" signature="2384:2405" placeholder="DROP TABLE I... " />
+          </folding>
         </state>
       </provider>
     </entry>

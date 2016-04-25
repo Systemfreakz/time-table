@@ -109,40 +109,45 @@ define('DAY_COLUMN_DISTANCE', 2);   //defines the space between the day columns 
                     foreach ($days as $day) {
                         if ($day != 'Samstag' && $day != 'Sonntag' || $useWeekendCourses) {
 
-                            $course = TimeTableEntry::getTimeTableEntryAtDayAndTime($day, $time);
-                            if (sizeof($course) > 0) {
-                                $course = $course[0];
-                                $overlappings = $course->countMaxConcurrentOverlappings();
-                                $length = ((date($course->getEndTime()) - date($course->getStartTime())) / 900);
-                                $width = (MAX_OVERLAPPINGS / $overlappings) * $td_width;
-                                echo '<td class="tt-timetable-cell" rowspan="' . $length . '" colspan="' . (MAX_OVERLAPPINGS / $overlappings) . '" width="' . $width . '%">';
-                                echo '<a id="tt-timetable-open-' . $day . (date($course->getStartTime()) / 900) . '" href="" class="tt-timetable-course tt-timetable-course-cat-' . $course->getCourse()->getCategory()->getId() . '">';
-                                echo '<span class="tt-course-date">' . date('H:i', $course->getStartTime()) . ' - ' . date('H:i', $course->getEndTime()) . '<br /></span><span class="tt-course-name">' . $course->getCourse()->getName() . '</span>';
-                                echo '</a>';
-                                echo '<div id="tt-timetable-overlay-' . $day . (date($course->getStartTime()) / 900) . '" class="tt-timetable-overlay">';
-                                echo '<img src="' . $course->getCourse()->getImage() . '" />';
-                                echo '<div class="tt-timetable-course-description">';
-                                echo '<div class="tt-timetable-course-name">' . $course->getCourse()->getName() . '</div>';
-                                echo $course->getCourse()->getDescription();
-                                if ($tt_params['more-info-link'] != 'hide' && $course->getCourse()->getLink() != '') {
-                                    echo '<a href="' . $course->getCourse()->getLink() . '" class="tt-timetable-link"' . ($tt_params['more-info-link'] == 'new-page'?' target="_blank"':'') . '>Mehr Infos</a></div>';
-                                }
-                                echo '<script language="javascript" type="text/javascript">';
-                                echo '(function($) {
+                            $courses = TimeTableEntry::getTimeTableEntryAtDayAndTime($day, $time);
+                            if (sizeof($courses) > 0) {
+                                foreach ($courses as $course) {
+                                    $overlappings = $course->countMaxConcurrentOverlappings();
+                                    $length = ((date($course->getEndTime()) - date($course->getStartTime())) / 900);
+                                    $width = (MAX_OVERLAPPINGS / $overlappings) * $td_width;
+                                    $id = $day . (date($course->getStartTime()) / 900) . '-' . $course->getId();
+                                    echo '<td class="tt-timetable-cell" rowspan="' . $length . '" colspan="' . (MAX_OVERLAPPINGS / $overlappings) . '" width="' . $width . '%">';
+                                    echo '<a id="tt-timetable-open-' . $id . '" href="" class="tt-timetable-course tt-timetable-course-cat-' . $course->getCourse()->getCategory()->getId() . '">';
+                                    if ($overlappings <= 2) {
+                                        echo '<span class="tt-course-date">' . date('H:i', $course->getStartTime()) . ' - ' . date('H:i', $course->getEndTime()) . '<br /></span>';
+                                    }
+                                    echo '<span class="tt-course-name">' . $course->getCourse()->getName() . '</span>';
+                                    echo '</a>';
+                                    echo '<div id="tt-timetable-overlay-' . $id . '" class="tt-timetable-overlay">';
+                                    echo '<img src="' . $course->getCourse()->getImage() . '" />';
+                                    echo '<div class="tt-timetable-course-description">';
+                                    echo '<div class="tt-timetable-course-name">' . $course->getCourse()->getName() . '</div>';
+                                    echo $course->getCourse()->getDescription();
+                                    if ($tt_params['more-info-link'] != 'hide' && $course->getCourse()->getLink() != '') {
+                                        echo '<a href="' . $course->getCourse()->getLink() . '" class="tt-timetable-link"' . ($tt_params['more-info-link'] == 'new-page'?' target="_blank"':'') . '>Mehr Infos</a></div>';
+                                    }
+                                    echo '<script language="javascript" type="text/javascript">';
+                                    echo '(function($) {
                                     $(window).ready(function() {
-                                        new TTOverlayBox("#tt-timetable-open-' . $day . (date($course->getStartTime()) / 900) . '",
-                                                $("#tt-timetable-overlay-' . $day . (date($course->getStartTime()) / 900) . '").html());
+                                        new TTOverlayBox("#tt-timetable-open-' . $id . '",
+                                                $("#tt-timetable-overlay-' . $id . '").html());
                                     });
                                 })(jQuery);';
-                                echo '</script>';
-                                echo '</div>';
-                                echo '</td>';
-                                $currentOverlappings = TimeTableEntry::countCurrentOverlappings($day, $time);
-                                for ($i_fill = 0; $i_fill < MAX_OVERLAPPINGS / $currentOverlappings - MAX_OVERLAPPINGS / $overlappings; $i_fill++) {
-                                    echo '<td width="' . $td_width . '"></td>';
-                                }
-                                for ($j = 0; $j < $length; $j++) {
-                                    $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = true;
+                                    echo '</script>';
+                                    echo '</div>';
+                                    echo '</td>';
+                                    $currentOverlappings = TimeTableEntry::countCurrentOverlappings($day, $time);
+                                    for ($i_fill = 0; $i_fill < ($overlappings - $currentOverlappings) * (MAX_OVERLAPPINGS / $overlappings); $i_fill++) {
+                                        echo '<td width="' . $td_width . '"></td>';
+                                    }
+                                    for ($j = 0; $j < $length; $j++) {
+                                        $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = true;
+                                    }
                                 }
                             }else if(!$timeSlotOverlap[($i - $starttime)/900][$day]) {
                                 echo '<td class="tt-timetable-cell" colspan="' . MAX_OVERLAPPINGS . '" width="' . $td_width * MAX_OVERLAPPINGS . '%">' . $timeSlotOverlap[($i - $starttime)/900][$day] . '</td>';

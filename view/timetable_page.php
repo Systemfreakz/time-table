@@ -63,7 +63,7 @@ if (isset($_POST['tt-settings-submit']) && $_POST['tt-settings-submit'] == 'Y') 
                 echo '<td>'.$entry->getCourse()->getName().'</td>';
                 echo '<td><strong>' . date('H:i', $entry->getStartTime()) . '</strong> bis <strong>' . date('H:i', $entry->getEndTime()) . '</strong></td>';
                 echo '<td><a href="admin.php?page=time-table&tab=add-course&course-id=' . $entry->getCourse()->getId() . '" class="button-primary">Bearbeiten</a></td>';
-                echo '<td><input type="submit" class="button-secondary tt-timetable-delete" name="tt-timetable-delete-' . $entry->getStartTime() . '" value="Löschen" /></td>';
+                echo '<td><input type="submit" class="button-secondary tt-timetable-delete" name="tt-timetable-delete-' . $entry->getId() . '" value="Löschen" /></td>';
                 echo '</tr>';
             }
             ?>
@@ -170,9 +170,9 @@ if (isset($_POST['tt-settings-submit']) && $_POST['tt-settings-submit'] == 'Y') 
             }
         }
         foreach (TimeTableEntry::getTimeTableEntriesAtDay(TimeTableEntry::$DAYS[$actDay]) as $entry){
-            if (isset($_POST['tt-timetable-delete-' . $entry->getStartTime()])){
+            if (isset($_POST['tt-timetable-delete-' . $entry->getId()])){
                 $wpdb->delete(
-                    $tablename, array('start_time' => date('H:i', $entry->getStartTime()))
+                    $tablename, array('id' => $entry->getId())
                 );
             }
         }
