@@ -47,7 +47,7 @@ define('DAY_COLUMN_DISTANCE', 2);   //defines the space between the day columns 
             $timeSlotOverlap = array();
             for ($i = 0; $i < ($endtime - $starttime) / 900; $i ++) {
                 for ($j = 0; $j < 7; $j ++) {
-                    $timeSlotOverlap[$i][$myDays[$j]] = false;
+                    $timeSlotOverlap[$i][$myDays[$j]] = 0;
                 }
             }
             $timetableGap = false;
@@ -146,11 +146,13 @@ define('DAY_COLUMN_DISTANCE', 2);   //defines the space between the day columns 
                                         echo '<td width="' . $td_width . '"></td>';
                                     }
                                     for ($j = 0; $j < $length; $j++) {
-                                        $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = true;
+                                        $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = $currentOverlappings;
                                     }
                                 }
-                            }else if(!$timeSlotOverlap[($i - $starttime)/900][$day]) {
-                                echo '<td class="tt-timetable-cell" colspan="' . MAX_OVERLAPPINGS . '" width="' . $td_width * MAX_OVERLAPPINGS . '%">' . $timeSlotOverlap[($i - $starttime)/900][$day] . '</td>';
+
+                            }else if($timeSlotOverlap[($i - $starttime)/900][$day] == 0 || TimeTableEntry::countCurrentOverlappings($day, $time) < $timeSlotOverlap[($i - $starttime)/900][$day]) {
+                                $tso = $timeSlotOverlap[($i - $starttime)/900][$day];
+                                echo '<td class="tt-timetable-cell" colspan="' . (MAX_OVERLAPPINGS / ($tso == 0?1:$tso)) . '" width="' . $td_width * MAX_OVERLAPPINGS . '%">' . '</td>';
                             }
                         }
                         $timetableGap = true;

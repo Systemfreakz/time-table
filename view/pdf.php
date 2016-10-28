@@ -20,7 +20,7 @@ $useWeekendCourses = sizeof($entriesSaturday) > 0 || sizeof($entriesSunday) > 0;
 $timeSlotOverlap = array();
 for ($i = 0; $i < ($endtime - $starttime) / 900; $i ++) {
     for ($j = 0; $j < 7; $j ++) {
-        $timeSlotOverlap[$i][$myDays[$j]] = false;
+        $timeSlotOverlap[$i][$myDays[$j]] = 0;
     }
 }
 $timetableGap = false;
@@ -78,11 +78,12 @@ for ($i = $starttime; $i < $endtime; $i += 900) {
                             $html .= '<td width="' . $td_width . '"></td>';
                         }
                         for ($j = 0; $j < $length; $j++) {
-                            $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = true;
+                            $timeSlotOverlap[($i - $starttime)/900 + $j][$day] = $currentOverlappings;
                         }
                     }
-                }else if(!$timeSlotOverlap[($i - $starttime)/900][$day]) {
-                    $html .= '<td colspan="' . MAX_OVERLAPPINGS . '" width="' . $td_width * MAX_OVERLAPPINGS . '" height="18px"' . (($i/900) % 2 == 0 ? ' style="border-top: 0px solid #000"' : '') . '></td>';
+                }else if($timeSlotOverlap[($i - $starttime)/900][$day] == 0 || TimeTableEntry::countCurrentOverlappings($day, $time) < $timeSlotOverlap[($i - $starttime)/900][$day]) {
+                    $tso = $timeSlotOverlap[($i - $starttime)/900][$day];
+                    $html .= '<td colspan="' . (MAX_OVERLAPPINGS / ($tso == 0?1:$tso)) . '" width="' . $td_width * MAX_OVERLAPPINGS . '" height="18px"' . (($i/900) % 2 == 0 ? ' style="border-top: 0px solid #000"' : '') . '></td>';
                 }
             }
             $timetableGap = true;

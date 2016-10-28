@@ -39,6 +39,11 @@ class TimeTableEntry {
         return $resultTimeTableEntries;
     }
 
+    /**
+     * @param $day
+     * @param $time
+     * @return TimeTableEntry[]
+     */
     public final static function getTimeTableEntryAtDayAndTime($day, $time) {
         global $wpdb;
         $entries = $wpdb->get_results('SELECT * FROM ' . $wpdb->prefix . 'time_table WHERE day = "' . $day . '"
